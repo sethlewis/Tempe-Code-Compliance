@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Tempe Code Compliance Map">
+    <meta name="author" content="City of Tempe Enterprise GIS, Data & Analytics">
+
+    <title>Tempe Code Compliance Map</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/CodeViolations.css" rel="stylesheet">
+    <link href="css/Index.css" rel="stylesheet" />
+
+    <!-- ESRI Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.16/esri/css/esri.css">
+    <link rel="stylesheet" type="text/css" href="//grs.asurite.ad.asu.edu/bootstrap-map-js/dist/css/bootstrapmap.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        /* Set the responsive map size here */
+
+        #tempeMap {
+            height: 100%;
+            min-height: 100%;
+        }
+
+        .intro {
+            background-color: #232227;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        html body {
+            height: 100%;
+            min-height: 100%;
+        }
+
+        .navbar-custom {
+            background-color: #232227;
+        }
+
+        .esriPopup.light .titlePane,
+        .dj_ie7 .esriPopup.light .titlePane .title {
+            background-color: #232227;
+            color: white;
+            font-weight: 700;
+        }
+
+        .esriPopup.light .titlePane {
+            border-bottom: 1px solid #232227;
+        }
+
+        .esriPopup.light .titleButton,
+        .esriPopup.light .pointer,
+        .esriPopup.light .esriViewPopup .gallery .mediaHandle,
+        .esriPopup.light .esriViewPopup .gallery .mediaIcon {
+            background-color: #424244 !important;
+        }
+
+        .esriPopup.light .contentPane,
+        .esriPopup.light .actionsPane {
+            color: white !important;
+            background-color: #424244 !important;
+            border-color: #232227;
+        }
+        /* Fixes for Autocomplete*/
+
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 10000;
+            float: left;
+            display: none;
+            min-width: 160px;
+            cursor: pointer;
+            padding: 10px 15px 10px 10px;
+            margin: 0 0 10px 25px;
+            list-style: none;
+            color: white;
+            background-color: #424244;
+            border-color: #232227;
+            border-style: solid;
+            border-width: 1px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px #232227;
+            -moz-box-shadow: 0 5px 10px #232227;
+            box-shadow: 0 5px 10px #232227;
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+            *border-right-width: 2px;
+            *border-bottom-width: 2px;
+        }
+
+        .ui-menu-item > a.ui-corner-all {
+            display: block;
+            padding: 10px 15px;
+            clear: both;
+            font-weight: normal;
+            line-height: 18px;
+            color: #555555;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .ui-state-hover,
+        .ui-state-active {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: #0088cc;
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            background-image: none;
+        }
+
+        ul.ui-autocomplete.ui-menu li {
+            font-family: Roboto;
+        }
+
+        .ui-state-focus {
+            color: #ffffff;
+            background: #E58F2A;
+        }
+
+        .esriSimpleSlider {
+            top: 100px !important;
+            left: 20px !important;
+        }
+
+        #HomeButton {
+            position: absolute;
+            top: 175px !important;
+            left: 20px !important;
+            z-index: 1000;
+        }
+
+        .HomeButton .home {
+            background-color: #fff !important;
+            background-image: url('images/icomoon-free_2014-12-23_home3_24_0_333333_none.png');
+        }
+    </style>
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="http://www.tempe.gov/city-hall/community-development/code-compliance" target="_blank">
+                    <i class="fa fa-home"></i> <span class="light">Tempe Code Compliance</span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" data-dojo-type="dijit/layout/ContentPane">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                   <!-- <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>-->
+                    <!--<li class="hidden">
+                        <a class="" href="#download">Maps</a>
+                        </li>-->
+
+                    <li class="input-group">
+                        <input type="text" id="associations" class="form-control" placeholder="Search by Address or Association">
+                    </li>
+                    <li>
+                        <a class="helpAnchor" href="#" data-toggle="modal" data-target="#helpInfoModal" span class="light">HELP</a>
+                    </li>
+                    <li>
+                        <a class="helpAnchor" href="http://www.tempe.gov/city-hall/communication-and-media-relations/tempe-311" span class="light" target="_blank">REPORT VIOLATION</a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <div id="tempeMap">
+        <div id="HomeButton"></div>
+    </div>
+
+    <!--Full Report Modal Content-->
+    <div class="modal fullscreen-modal fade" id="ReportFullCon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title infoTitle text-center"> Tempe Code Violation Report </h3>
+                </div>
+                <div class="modal-body text-center">
+                    <h4 data-toggle="tooltip" data-placement="left" id="frHeader"> Violation Information </h4>
+                    <div class="frContent">
+
+                    </div>
+                    <div class="frRelated">
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center footer-act">
+                        <button type="button" class="btn btn-default footer-btn" data-dismiss="modal">  Back To Map </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Report Modal Content Complete -->
+    <!--HOA Report Modal Content-->
+    <div class="modal fullscreen-modal fade" id="hoaInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title infoTitle text-center"> HOA/Neighborhood Association Information</h3>
+                </div>
+                <div class="modal-body text-center">
+                    <!--<h4 data-toggle="tooltip" data-placement="left" id="H1">Information </h4>-->
+
+                    <div class="hoaContent">
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center footer-act">
+                        <button type="button" class="btn btn-default footer-btn" data-dismiss="modal">Back To Map </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HOA Report Modal Content Complete -->
+    <!--Help Modal Content-->
+    <div class="modal fullscreen-modal fade" id="helpInfoModal" data-dismiss="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title infoTitle text-center"> Tempe Code Compliance Map </h3>
+                </div>
+                <div class="modal-body text-center violationTextContainer">
+                    <h4 data-toggle="tooltip" data-placement="left"> Violation Information </h4>
+                    <div class="violationLegend">
+                        <h4 class="helpNoteText">
+                            <img src="https://gis.tempe.gov/arcgis/rest/services/CommunityDevelopment/Code_Violations/MapServer/1/images/b43762973c02838d52195f03ba74cfb4" /> <small> Open Violations  - This includes currently open violations.</small>
+                        </h4>
+                        <h4 class="helpNoteText">
+                            <img src="https://gis.tempe.gov/arcgis/rest/services/CommunityDevelopment/Code_Violations/MapServer/0/images/49fa1477e7aba9e3e380e75b1a62d51d" /> <small> Recently Closed Violations - This includes violations that have been recently closed in the last two week period. </small>
+                        </h4>
+                        <h4 class="helpNoteText">
+                            <img src="https://gis.tempe.gov/arcgis/rest/services/CommunityDevelopment/Residential_Associations/MapServer/1/images/5d399a1f27fbb8ff194f4281f53bdb01" /> <small> Homeowners Associations - Formal resident organizations from single neighborhoods with defined boundaries that do not overlap </small>
+                        </h4>
+                        <h4 class="helpNoteText">
+                            <img src="https://gis.tempe.gov/arcgis/rest/services/CommunityDevelopment/Residential_Associations/MapServer/1/images/08c565d6ab0c0239800034884ebe491e" /> <small> Neighborhood Associations - Voluntary resident organizations from single neighborhoods with defined boundaries that do not overlap </small>
+                        </h4>
+
+                    </div>
+                    <div class="violationHelp">
+                        <h4>Using the Application</h4>
+                        <h4 class="helpNoteText"> <small>Click on a violation to see its Status in a popup.<br /><br />To go back, click on the <b> Back to Map button </b>  or hit the close icon. </small></h4>
+                    </div>
+                    <div class="violationInfo">
+                        <h4>Finding Your Homeowners/Neighborhood Association </h4>
+                        <h4><small>Begin typing your address or association <b>in the search form located at the top of the map</b> to find information about your HOA/Neighborhood Association.</small></h4>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center footer-info">
+                        <button type="button" class="btn btn-default footer-btn" data-dismiss="modal">  Go To Map </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Help Modal Content Complete -->
+    <!-- Footer -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Jquery UI -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+
+
+    <!-- Step 3. Add JS to Load the responsive map -->
+    <script type="text/javascript">
+        var package_path = "//grs.asurite.ad.asu.edu/bootstrap-map-js/dist/js/";
+        var dojoConfig = {
+            packages: [{
+                name: "application",
+                location: package_path
+            }]
+        };
+    </script>
+    <script src="//js.arcgis.com/3.16compact"></script>
+    <script src="js/map.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+﻿.container-preview {
+    position: relative;
+}
+.preview-wrapper {
+    border: 1px solid #42dca3;
+}
+.preview-map-wrapper {
+    border-bottom: 0 none;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+.preview-map {
+    background-color: #e5e3df;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.preview-image {
+    display: block;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    transform: translateZ(0px);
+    width: 100%;
+}
+.preview-image img {
+    height: 350px;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -175px;
+    position: absolute;
+    top: 50%;
+    width: 600px;
+}
+.preview-details {
+    background-color: none;
+    color: #42dca3;
+    display: block;
+    position: relative;
+    transition: background-color 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s, border 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s, color 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s, opacity 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s;
+    width: 100%;
+}
+.preview-details:hover, .preview-details:focus, .preview-details:active {
+    background-color: #00bc66;
+    color: #fff;
+}
+.preview-details:hover .preview-info, .preview-details:focus .preview-info, .preview-details:active .preview-info {
+    border-color: #00bc66;
+}
+.preview-details:hover .preview-title, .preview-details:focus .preview-title, .preview-details:active .preview-title {
+    color: #fff;
+}
+.preview-details:hover .preview-arrow, .preview-details:focus .preview-arrow, .preview-details:active .preview-arrow {
+    color: rgba(255, 255, 255, 0.5);
+    transform: translate(0px, 0px);
+}
+.preview-info {
+    border-top: 1px solid #f0f0f0;
+    display: block;
+    padding: 20px;
+    position: relative;
+    transition: background-color 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s, border 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s;
+}
+.preview-title, .preview-designer {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.preview-title {
+    color: #00bc66;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    transition: color 0.15s cubic-bezier(0.345, 0, 0.25, 1) 0s;
+}
+.preview-stats {
+    display: block;
+    margin-top: 10px;
+}
+.preview-stats .views > *, .preview-stats .favs > * {
+    vertical-align: middle;
+}
+.preview-stats .favs {
+    margin-left: 10px;
+}
+.preview-arrow {
+    color: transparent;
+    font-size: 31px;
+    margin-top: -15.5px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-200%, 0px);
+    transition: all 0.3s cubic-bezier(0.345, 0, 0.25, 1) 0s;
+}
+.preview-links {
+    background-color: #fafafa;
+    border-top: 1px solid #f0f0f0;
+    min-height: 41px;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 3;
+}
+.container-preview .preview-links {
+    margin-top: -1px;
+}
+@media (min-width: 600px) and (max-width: 767px) {
+
+.preview-map-wrapper, .preview-image {
+    left: 50%;
+    width: 50%;
+    z-index: 2;
+}
+.preview-map-wrapper {
+    position: absolute;
+    right: 20px;
+    width: auto;
+}
+.preview-map-wrapper ~ .preview-details {
+    height: 250px;
+}
+.preview-info {
+    border-top: medium none;
+    bottom: 0;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    width: 50%;
+}
+.preview-info .title {
+    overflow: visible;
+    white-space: normal;
+}
+.preview-info .preview-links {
+    bottom: 0;
+    left: 0;
+    padding: 12px 20px;
+    position: absolute;
+    width: 100%;
+}
+}
+.favorite-style {
+    background-color: transparent;
+    border: medium none;
+    bottom: 0;
+    color: #00bc66;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+}
+.favorite-style:hover, .favorite-style:focus, .favorite-style:active {
+    color: #00703c;
+}
+
+@media (min-width: 768px) {
+.preview-image img {
+    height: 350px;
+    width: 600px;
+}
+.preview-details {
+    position: relative;
+}
+.preview-details .preview-details .title {
+    font-size: 20px;
+    line-height: 24px;
+}
+.explore {
+    width: auto;
+}
+}
+
+.intro-body h2 b
+{
+font-size: 50px;
+color:#42dca3;
+}
+
+.input-group {
+    width: 300px;
+    font-size: 18px;
+    padding-top: 10px;
+}
