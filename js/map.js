@@ -131,10 +131,10 @@ require(["esri/map",
             SimpleFillSymbol.STYLE_SOLID,
             new SimpleLineSymbol(
                 SimpleLineSymbol.STYLE_SOLID,
-                new Color([122, 136, 158, 1]),
+                new Color([121, 136, 158, 1]),
                 1
             ),
-            new Color([122, 136, 158, 0])
+            new Color([121, 136, 158, 0])
         );
 
 
@@ -401,7 +401,7 @@ function intializeAutoComplete() {
 function showResults(in_query_term) {
     markupLayer.clear();
 
-    //get a reference back to the HOA layer    
+    //get a reference back to the HOA layer
     var tempLyr = map.getLayer(opvIdentifier.HOA);
     var tempQuery = new esri.tasks.Query();
     tempQuery.where = "nbrhd_name = '" + in_query_term + "'";
