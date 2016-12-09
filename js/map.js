@@ -127,6 +127,17 @@ require(["esri/map",
             }
         });
 
+        var symbol = new SimpleFillSymbol(
+            SimpleFillSymbol.STYLE_SOLID,
+            new SimpleLineSymbol(
+                SimpleLineSymbol.STYLE_SOLID,
+                new Color([122, 136, 158, 1]),
+                1
+            ),
+            new Color([122, 136, 158, 0])
+        );
+
+
         map.on("load", function () {
 
             markupLayer = new GraphicsLayer();
@@ -137,6 +148,9 @@ require(["esri/map",
                 minScale: 1128.497176,
                 maxScale: 0
             });
+
+            parcelLyr.setRenderer(new SimpleRenderer(symbol));
+
             addOverViewLayers(
                 'https://gis.tempe.gov/arcgis/rest/services/CommunityDevelopment/Residential_Associations/MapServer/1',
                 opvIdentifier.HOA);
@@ -150,11 +164,7 @@ require(["esri/map",
                 'https://gis.tempe.gov/arcgis/rest/services/CommunityDevelopment/Code_Violations/MapServer/1',
                 opvIdentifier.OV);
 
-            
-
         });
-
-        
 
         var darkMap = new WebTiledLayer("https://api.mapbox.com/styles/v1/sethlewistempe/ciuiu00k4002r2inog8qp4iwa/tiles/256/{level}/{col}/{row}@2x?access_token=pk.eyJ1Ijoic2V0aGxld2lzdGVtcGUiLCJhIjoiYWFmNzVlNjkyOGI4N2E4NzE0NTJkMjFjYzk5ZmRmOGUifQ.dkeg1KK9NfXvPjX3jYn4fg");
 
