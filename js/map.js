@@ -166,7 +166,8 @@ require(["esri/map",
 
         });
 
-        var darkMap = new WebTiledLayer("https://api.mapbox.com/styles/v1/sethlewistempe/ciuiu00k4002r2inog8qp4iwa/tiles/256/{level}/{col}/{row}@2x?access_token=pk.eyJ1Ijoic2V0aGxld2lzdGVtcGUiLCJhIjoiYWFmNzVlNjkyOGI4N2E4NzE0NTJkMjFjYzk5ZmRmOGUifQ.dkeg1KK9NfXvPjX3jYn4fg");
+        VectorTileLayer.ACCESS_TOKEN = "pk.eyJ1Ijoic2V0aGxld2lzdGVtcGUiLCJhIjoiYWFmNzVlNjkyOGI4N2E4NzE0NTJkMjFjYzk5ZmRmOGUifQ.dkeg1KK9NfXvPjX3jYn4fg"
+        var darkMap = new VectorTileLayer("mapbox://styles/sethlewistempe/ciuiu00k4002r2inog8qp4iwa");
 
         map.addLayer(darkMap);
 
