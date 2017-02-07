@@ -64,7 +64,7 @@ require(["esri/map",
         map = BootstrapMap.create("tempeMap", {
             //basemap: "dark-gray-vector",
             center: [-111.93, 33.4],
-            zoom: 14,
+            zoom: 13,
             logo: false,
             slider: true,
             scrollWheelZoom: true
@@ -168,7 +168,7 @@ require(["esri/map",
         });
 
         VectorTileLayer.ACCESS_TOKEN = "pk.eyJ1Ijoic2V0aGxld2lzdGVtcGUiLCJhIjoiYWFmNzVlNjkyOGI4N2E4NzE0NTJkMjFjYzk5ZmRmOGUifQ.dkeg1KK9NfXvPjX3jYn4fg"
-        var darkMap = new VectorTileLayer("mapbox://styles/sethlewistempe/ciuiu00k4002r2inog8qp4iwa");
+        var darkMap = new VectorTileLayer("mapbox://styles/sethlewistempe/ciusxpjwv00f82iqogbpr7kdf");
 
         map.addLayer(darkMap);
 
