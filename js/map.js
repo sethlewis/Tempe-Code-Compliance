@@ -64,7 +64,7 @@ require(["esri/map",
         map = BootstrapMap.create("tempeMap", {
             //basemap: "dark-gray-vector",
             center: [-111.93, 33.4],
-            zoom: 14,
+            zoom: 13,
             logo: false,
             slider: true,
             scrollWheelZoom: true
