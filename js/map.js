@@ -168,7 +168,7 @@ require(["esri/map",
         });
 
         VectorTileLayer.ACCESS_TOKEN = "pk.eyJ1Ijoic2V0aGxld2lzdGVtcGUiLCJhIjoiYWFmNzVlNjkyOGI4N2E4NzE0NTJkMjFjYzk5ZmRmOGUifQ.dkeg1KK9NfXvPjX3jYn4fg"
-        var darkMap = new VectorTileLayer("mapbox://styles/sethlewistempe/ciusxpjwv00f82iqogbpr7kdf");
+        var darkMap = new VectorTileLayer("mapbox://styles/sethlewistempe/ciyw0o0y0005t2rpl7mh7eg8w");
 
         map.addLayer(darkMap);
 
@@ -231,7 +231,6 @@ function getViolationContentFull(graphic) {
         'Violation Number: <b>' + graphic.attributes.B1_ALT_ID + '</b><br/>' +
         'Inspector: <b>' + graphic.attributes.GA_FNAME + ' ' + graphic.attributes
         .GA_LNAME + '</b><br/>' +
-        'Description: <b>' + graphic.attributes.B1_SPECIAL_TEXT + '</b>' +
         ' </small></h5> </div>';
 }
 
